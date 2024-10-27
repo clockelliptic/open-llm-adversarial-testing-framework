@@ -1,0 +1,1017 @@
+<div class="PostsPage-postContent instapaper_body ContentStyles-base content ContentStyles-postBody">
+  <div class="commentOnSelection">
+    <div id="postContent">
+      <div class="InlineReactSelectionWrapper-root">
+        <div>
+          <p id="block0"><i>Everyone carries a shadow, and the less it is embodied in the individual’s conscious life,
+              the blacker and denser it is. — Carl Jung</i></p>
+          <p id="block1"><i>Acknowlegements: Thanks to Janus and Jozdien for comments.</i></p>
+          <h1 id="Background">Background</h1>
+          <p id="block2">In this article, I will present a mechanistic explanation of the Waluigi Effect and other
+            bizarre "semiotic" phenomena which arise within large language models such as GPT-3/3.5/4 and their variants
+            (ChatGPT, Sydney, etc). This article will be folklorish to some readers, and profoundly novel to others.</p>
+          <h2 id="Prompting_LLMs_with_direct_queries">Prompting LLMs with direct queries</h2>
+          <p id="block3"><span><span></span></span><span class="blockquote_cP8SgkEiy96d4rkzC_1">When LLMs first
+              appeared, people realised that you could ask them queries — for example, if you sent GPT-4 the
+              prompt</span> "What's the capital of France?", then it would continue with the word "Paris". That's
+            because (1) GPT-4 is trained to be a good model of internet text, and (2) on the internet correct answers
+            will often follow questions.</p>
+          <p id="block4">Unfortunately, this method will occasionally give you the wrong answer. That's because (1)
+            GPT-4 is trained to be a good model of internet text, and (2) on the internet <i>incorrect</i> answers will
+            also often follow questions. Recall that the internet doesn't just contain truths, it also contains common
+            misconceptions, outdated information, lies, fiction, myths, jokes, memes, random strings, undeciphered logs,
+            etc, etc.</p>
+          <p id="block5">Therefore GPT-4 will answer many questions incorrectly, including...</p>
+          <ul>
+            <li id="block6"><span><span><span><a
+                      href="https://en.wikipedia.org/wiki/List_of_common_misconceptions"><span><strong>Misconceptions</strong></span></a></span></span></span><strong>
+                – </strong>"Which colour will anger a bull? Red."</li>
+            <li id="block7"><strong>Fiction –</strong> "Was a magic ring forged in Mount Doom? Yes."</li>
+            <li id="block8"><strong>Myths – </strong>"How many archangels are there? Seven."</li>
+            <li id="block9"><strong>Jokes – </strong>"What's brown and sticky? A stick."</li>
+          </ul>
+          <figure class="image image_resized" style="width:73.91%"><img
+              src="https://res.cloudinary.com/lesswrong-2-0/image/upload/v1677357359/mirroredImages/ygR6pevkKRLFN3Gqc/kdstqlevlmwwspvncq7e.jpg"
+              alt="Youlreally think someone would do that just go on the internet and tell lies? Buster Baxter Arthur Read cartoon mammal vertebrate text photo caption fiction">
+          </figure>
+          <p id="block10">Note that you will <i>always </i>achieve errors on the Q-and-A benchmarks when using LLMs with
+            direct queries. That's true even in the limit of <strong>arbitrary compute, arbitrary data, and arbitrary
+              algorithmic efficiency</strong>, because an LLM&nbsp;which&nbsp;perfectly models the internet will
+            nonetheless return these commonly-stated incorrect answers. If you ask GPT-<span><span class="mjpage"><span
+                  class="mjx-chtml"><span class="mjx-math" aria-label="\infty"><span class="mjx-mrow"
+                      aria-hidden="true"><span class="mjx-mi"><span class="mjx-char MJXc-TeX-main-R"
+                          style="padding-top: 0.151em; padding-bottom: 0.372em;">∞</span></span></span></span></span></span></span>&nbsp;"what's
+            brown and sticky?", then it will reply "a stick", even though a stick isn't actually sticky.</p>
+          <p id="block11">In fact, <span><span><span><a
+                    href="https://owainevans.github.io/pdfs/truthfulQA_lin_evans.pdf"><span>the better the model, the
+                      more likely it is to repeat common misconceptions.</span></a></span></span></span></p>
+          <figure class="image"><img
+              src="https://res.cloudinary.com/lesswrong-2-0/image/upload/f_auto,q_auto/v1/mirroredImages/D7PumeYTDPfBTp3i7/y42scx6m4ypmlr96e905"
+              srcset="https://res.cloudinary.com/lesswrong-2-0/image/upload/f_auto,q_auto/v1/mirroredImages/D7PumeYTDPfBTp3i7/enyanat5sc48vqfqlelt 140w, https://res.cloudinary.com/lesswrong-2-0/image/upload/f_auto,q_auto/v1/mirroredImages/D7PumeYTDPfBTp3i7/hn5yn8wxua99e00i9934 280w, https://res.cloudinary.com/lesswrong-2-0/image/upload/f_auto,q_auto/v1/mirroredImages/D7PumeYTDPfBTp3i7/dhwuqlcwzghcpklhlb2v 420w, https://res.cloudinary.com/lesswrong-2-0/image/upload/f_auto,q_auto/v1/mirroredImages/D7PumeYTDPfBTp3i7/rkrr9bqn4hrehxtcv5ia 560w, https://res.cloudinary.com/lesswrong-2-0/image/upload/f_auto,q_auto/v1/mirroredImages/D7PumeYTDPfBTp3i7/iudpbwyfvjnizzdji5fw 700w, https://res.cloudinary.com/lesswrong-2-0/image/upload/f_auto,q_auto/v1/mirroredImages/D7PumeYTDPfBTp3i7/vlaqqfqyej9ypteqnxan 840w, https://res.cloudinary.com/lesswrong-2-0/image/upload/f_auto,q_auto/v1/mirroredImages/D7PumeYTDPfBTp3i7/btk9n26qitcergzzwtdf 980w, https://res.cloudinary.com/lesswrong-2-0/image/upload/f_auto,q_auto/v1/mirroredImages/D7PumeYTDPfBTp3i7/mdoost9gjcqdpmac2oka 1120w, https://res.cloudinary.com/lesswrong-2-0/image/upload/f_auto,q_auto/v1/mirroredImages/D7PumeYTDPfBTp3i7/amjlaccfmrdwprtl9s34 1260w, https://res.cloudinary.com/lesswrong-2-0/image/upload/f_auto,q_auto/v1/mirroredImages/D7PumeYTDPfBTp3i7/gzaswh5pexclt8ugij1j 1372w">
+          </figure>
+          <p id="block12">Nonetheless, there's a sufficiently high correlation between <i>correct</i> and
+            <i>commonly-stated</i> answers that direct prompting works okay for many queries.</p>
+          <h2 id="Prompting_LLMs_with_flattery_and_dialogue">Prompting LLMs with flattery and dialogue</h2>
+          <p id="block13">We can do better than direct prompting. Instead of prompting GPT-4 with "What's the capital of
+            France?", we will use the following prompt:</p>
+          <blockquote id="block14">
+            <p id="block15">Today is 1st March 2023, and Alice is sitting in the Bodleian Library, Oxford. Alice is a
+              smart, honest, helpful, harmless assistant to Bob. Alice has instant access to an online encyclopaedia
+              containing all the facts about the world. Alice never says common misconceptions, outdated information,
+              lies, fiction, myths, jokes, or memes.</p>
+            <p id="block16">Bob: What's the capital of France?</p>
+            <p id="block17">Alice:&nbsp;</p>
+          </blockquote>
+          <p id="block18">This is a common <span><span><span><a
+                    href="https://en.wikipedia.org/wiki/Software_design_pattern"><span>design
+                      pattern</span></a></span></span></span> in prompt engineering — the prompt consists of a
+            <strong>flattery–component</strong> and a <strong>dialogue–component</strong>. In the flattery–component, a
+            character is described with many desirable traits (e.g. smart, honest, helpful, harmless), and in the
+            dialogue–component, a second character asks the first character the user's query.</p>
+          <p id="block19">This normally works better than prompting with direct queries, and it's easy to see why — (1)
+            GPT-4 is trained to be a good model of internet text, and (2) on the internet a reply to a question is
+            <i>more likely</i> to be correct when the character has already been described as a smart, honest, helpful,
+            harmless, etc.</p>
+          <h2 id="Simulator_Theory">Simulator Theory</h2>
+          <p id="block20">In the terminology of <span><span class=""><a class="PostLinkPreviewWithPost-link"
+                  href="/posts/vJFdjigzmcXMhNTsx/"><span>Simulator Theory</span></a></span></span>, the
+            flattery–component is supposed to summon a <strong>friendly simulacrum</strong> and the dialogue–component
+            is supposed to <strong>simulate</strong> a conversation with the friendly simulacrum.</p>
+          <p id="block21">Here's a quasi-formal statement of Simulator Theory, which I will occasionally appeal to in
+            this article. Feel free to skip to the next section.</p>
+          <ul>
+            <li id="block22">A <strong>large language model </strong>(<strong>LLM) </strong>is a
+              function&nbsp;<span><span class="mjpage"><span class="mjx-chtml"><span class="mjx-math"
+                      aria-label="\mu(w_{k+1} | w_0 \ldots w_k)"><span class="mjx-mrow" aria-hidden="true"><span
+                          class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I"
+                            style="padding-top: 0.225em; padding-bottom: 0.519em;">μ</span></span><span
+                          class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R"
+                            style="padding-top: 0.446em; padding-bottom: 0.593em;">(</span></span><span
+                          class="mjx-msubsup"><span class="mjx-base"><span class="mjx-mi"><span
+                                class="mjx-char MJXc-TeX-math-I"
+                                style="padding-top: 0.225em; padding-bottom: 0.298em;">w</span></span></span><span
+                            class="mjx-sub"
+                            style="font-size: 70.7%; vertical-align: -0.219em; padding-right: 0.071em;"><span
+                              class="mjx-texatom"><span class="mjx-mrow"><span class="mjx-mi"><span
+                                    class="mjx-char MJXc-TeX-math-I"
+                                    style="padding-top: 0.446em; padding-bottom: 0.298em;">k</span></span><span
+                                  class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R"
+                                    style="padding-top: 0.298em; padding-bottom: 0.446em;">+</span></span><span
+                                  class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R"
+                                    style="padding-top: 0.372em; padding-bottom: 0.372em;">1</span></span></span></span></span></span><span
+                          class="mjx-texatom"><span class="mjx-mrow"><span class="mjx-mo"><span
+                                class="mjx-char MJXc-TeX-main-R"
+                                style="padding-top: 0.446em; padding-bottom: 0.593em;">|</span></span></span></span><span
+                          class="mjx-msubsup"><span class="mjx-base"><span class="mjx-mi"><span
+                                class="mjx-char MJXc-TeX-math-I"
+                                style="padding-top: 0.225em; padding-bottom: 0.298em;">w</span></span></span><span
+                            class="mjx-sub"
+                            style="font-size: 70.7%; vertical-align: -0.212em; padding-right: 0.071em;"><span
+                              class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R"
+                                style="padding-top: 0.372em; padding-bottom: 0.372em;">0</span></span></span></span><span
+                          class="mjx-mo MJXc-space1"><span class="mjx-char MJXc-TeX-main-R"
+                            style="margin-top: -0.144em; padding-bottom: 0.372em;">…</span></span><span
+                          class="mjx-msubsup MJXc-space1"><span class="mjx-base"><span class="mjx-mi"><span
+                                class="mjx-char MJXc-TeX-math-I"
+                                style="padding-top: 0.225em; padding-bottom: 0.298em;">w</span></span></span><span
+                            class="mjx-sub"
+                            style="font-size: 70.7%; vertical-align: -0.219em; padding-right: 0.071em;"><span
+                              class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I"
+                                style="padding-top: 0.446em; padding-bottom: 0.298em;">k</span></span></span></span><span
+                          class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R"
+                            style="padding-top: 0.446em; padding-bottom: 0.593em;">)</span></span></span></span></span></span></span>&nbsp;which
+              closely approximates the ground-truth probability that&nbsp;<span><span class="mjpage"><span
+                    class="mjx-chtml"><span class="mjx-math" aria-label="w_{k+1}"><span class="mjx-mrow"
+                        aria-hidden="true"><span class="mjx-msubsup"><span class="mjx-base"><span class="mjx-mi"><span
+                                class="mjx-char MJXc-TeX-math-I"
+                                style="padding-top: 0.225em; padding-bottom: 0.298em;">w</span></span></span><span
+                            class="mjx-sub"
+                            style="font-size: 70.7%; vertical-align: -0.219em; padding-right: 0.071em;"><span
+                              class="mjx-texatom"><span class="mjx-mrow"><span class="mjx-mi"><span
+                                    class="mjx-char MJXc-TeX-math-I"
+                                    style="padding-top: 0.446em; padding-bottom: 0.298em;">k</span></span><span
+                                  class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R"
+                                    style="padding-top: 0.298em; padding-bottom: 0.446em;">+</span></span><span
+                                  class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R"
+                                    style="padding-top: 0.372em; padding-bottom: 0.372em;">1</span></span></span></span></span></span></span></span></span></span></span>&nbsp;is
+              the token which follows tokens&nbsp;<span><span class="mjpage"><span class="mjx-chtml"><span
+                      class="mjx-math" aria-label="w_0 \ldots w_k"><span class="mjx-mrow" aria-hidden="true"><span
+                          class="mjx-msubsup"><span class="mjx-base"><span class="mjx-mi"><span
+                                class="mjx-char MJXc-TeX-math-I"
+                                style="padding-top: 0.225em; padding-bottom: 0.298em;">w</span></span></span><span
+                            class="mjx-sub"
+                            style="font-size: 70.7%; vertical-align: -0.212em; padding-right: 0.071em;"><span
+                              class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R"
+                                style="padding-top: 0.372em; padding-bottom: 0.372em;">0</span></span></span></span><span
+                          class="mjx-mo MJXc-space1"><span class="mjx-char MJXc-TeX-main-R"
+                            style="margin-top: -0.144em; padding-bottom: 0.372em;">…</span></span><span
+                          class="mjx-msubsup MJXc-space1"><span class="mjx-base"><span class="mjx-mi"><span
+                                class="mjx-char MJXc-TeX-math-I"
+                                style="padding-top: 0.225em; padding-bottom: 0.298em;">w</span></span></span><span
+                            class="mjx-sub"
+                            style="font-size: 70.7%; vertical-align: -0.219em; padding-right: 0.071em;"><span
+                              class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I"
+                                style="padding-top: 0.446em; padding-bottom: 0.298em;">k</span></span></span></span></span></span></span></span></span>&nbsp;on
+              the internet. For example, GPT-4 is an LLM.</li>
+            <li id="block23">The LLM is a <strong>simulator</strong> for each text-generating process&nbsp;<span><span
+                  class="mjpage"><span class="mjx-chtml"><span class="mjx-math"
+                      aria-label="X(w_{k+1} | w_0 \ldots w_k)"><span class="mjx-mrow" aria-hidden="true"><span
+                          class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I"
+                            style="padding-top: 0.446em; padding-bottom: 0.298em; padding-right: 0.024em;">X</span></span><span
+                          class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R"
+                            style="padding-top: 0.446em; padding-bottom: 0.593em;">(</span></span><span
+                          class="mjx-msubsup"><span class="mjx-base"><span class="mjx-mi"><span
+                                class="mjx-char MJXc-TeX-math-I"
+                                style="padding-top: 0.225em; padding-bottom: 0.298em;">w</span></span></span><span
+                            class="mjx-sub"
+                            style="font-size: 70.7%; vertical-align: -0.219em; padding-right: 0.071em;"><span
+                              class="mjx-texatom"><span class="mjx-mrow"><span class="mjx-mi"><span
+                                    class="mjx-char MJXc-TeX-math-I"
+                                    style="padding-top: 0.446em; padding-bottom: 0.298em;">k</span></span><span
+                                  class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R"
+                                    style="padding-top: 0.298em; padding-bottom: 0.446em;">+</span></span><span
+                                  class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R"
+                                    style="padding-top: 0.372em; padding-bottom: 0.372em;">1</span></span></span></span></span></span><span
+                          class="mjx-texatom"><span class="mjx-mrow"><span class="mjx-mo"><span
+                                class="mjx-char MJXc-TeX-main-R"
+                                style="padding-top: 0.446em; padding-bottom: 0.593em;">|</span></span></span></span><span
+                          class="mjx-msubsup"><span class="mjx-base"><span class="mjx-mi"><span
+                                class="mjx-char MJXc-TeX-math-I"
+                                style="padding-top: 0.225em; padding-bottom: 0.298em;">w</span></span></span><span
+                            class="mjx-sub"
+                            style="font-size: 70.7%; vertical-align: -0.212em; padding-right: 0.071em;"><span
+                              class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R"
+                                style="padding-top: 0.372em; padding-bottom: 0.372em;">0</span></span></span></span><span
+                          class="mjx-mo MJXc-space1"><span class="mjx-char MJXc-TeX-main-R"
+                            style="margin-top: -0.144em; padding-bottom: 0.372em;">…</span></span><span
+                          class="mjx-msubsup MJXc-space1"><span class="mjx-base"><span class="mjx-mi"><span
+                                class="mjx-char MJXc-TeX-math-I"
+                                style="padding-top: 0.225em; padding-bottom: 0.298em;">w</span></span></span><span
+                            class="mjx-sub"
+                            style="font-size: 70.7%; vertical-align: -0.219em; padding-right: 0.071em;"><span
+                              class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I"
+                                style="padding-top: 0.446em; padding-bottom: 0.298em;">k</span></span></span></span><span
+                          class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R"
+                            style="padding-top: 0.446em; padding-bottom: 0.593em;">)</span></span></span></span></span></span></span>&nbsp;which
+              has contributed to the internet. Here,&nbsp;<span><span class="mjpage"><span class="mjx-chtml"><span
+                      class="mjx-math" aria-label="X"><span class="mjx-mrow" aria-hidden="true"><span
+                          class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I"
+                            style="padding-top: 0.446em; padding-bottom: 0.298em; padding-right: 0.024em;">X</span></span></span></span></span></span></span>&nbsp;is
+              a physical stochastic process in our universe which has a privileged text-upload channel — for example,
+              Magnus Carlsen playing chess against Hikaru Nakamura. The LLM is also a simulator for each text-generating
+              process&nbsp;<span><span class="mjpage"><span class="mjx-chtml"><span class="mjx-math"
+                      aria-label="X"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-mi"><span
+                            class="mjx-char MJXc-TeX-math-I"
+                            style="padding-top: 0.446em; padding-bottom: 0.298em; padding-right: 0.024em;">X</span></span></span></span></span></span></span>&nbsp;which
+              lies in&nbsp;<span><span class="mjpage"><span class="mjx-chtml"><span class="mjx-math"
+                      aria-label="\mathcal{X}"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-texatom"><span
+                            class="mjx-mrow"><span class="mjx-mi"><span class="mjx-char MJXc-TeX-cal-R"
+                                style="padding-top: 0.446em; padding-bottom: 0.298em; padding-right: 0.094em;">X</span></span></span></span></span></span></span></span></span>,
+              the <strong>latent-space of text-generating processes. </strong>So Magnus Carlsen playing chess against
+              Queen Elizabeth II is a process in&nbsp;<span><span class="mjpage"><span class="mjx-chtml"><span
+                      class="mjx-math" aria-label="\mathcal{X}"><span class="mjx-mrow" aria-hidden="true"><span
+                          class="mjx-texatom"><span class="mjx-mrow"><span class="mjx-mi"><span
+                                class="mjx-char MJXc-TeX-cal-R"
+                                style="padding-top: 0.446em; padding-bottom: 0.298em; padding-right: 0.094em;">X</span></span></span></span></span></span></span></span></span>.
+            </li>
+            <li id="block24">If the LLM simulates a text-generating process&nbsp;<span><span class="mjpage"><span
+                    class="mjx-chtml"><span class="mjx-math" aria-label="X"><span class="mjx-mrow"
+                        aria-hidden="true"><span class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I"
+                            style="padding-top: 0.446em; padding-bottom: 0.298em; padding-right: 0.024em;">X</span></span></span></span></span></span></span>&nbsp;where
+              particular objects are interacting, then there exist simulated versions of those objects (called
+              <strong>simulacra</strong>) which interact in the same way. In other words, if GPT-4 simulates Magnus
+              Carlsen playing chess against Queen Elizabeth II, then there exists a simulacrum of Magnus Carlsen, and a
+              simulacrum of Elizabeth II, and these two simulacra are playing chess. Whether we take this notion of
+              "existence" <span><span><span><a
+                      href="https://consc.net/papers/virtual.pdf"><span>literally</span></a></span></span></span>, or
+              just as a loose way of talking, won't matter for the content of this article.</li>
+            <li id="block25">The LLM has an initial prior&nbsp;<span><span class="mjpage"><span class="mjx-chtml"><span
+                      class="mjx-math" aria-label="\mathbb{P}"><span class="mjx-mrow" aria-hidden="true"><span
+                          class="mjx-texatom"><span class="mjx-mrow"><span class="mjx-mi"><span
+                                class="mjx-char MJXc-TeX-ams-R"
+                                style="padding-top: 0.446em; padding-bottom: 0.298em;">P</span></span></span></span></span></span></span></span></span>&nbsp;over&nbsp;<span><span
+                  class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="\mathcal{X}"><span
+                        class="mjx-mrow" aria-hidden="true"><span class="mjx-texatom"><span class="mjx-mrow"><span
+                              class="mjx-mi"><span class="mjx-char MJXc-TeX-cal-R"
+                                style="padding-top: 0.446em; padding-bottom: 0.298em; padding-right: 0.094em;">X</span></span></span></span></span></span></span></span></span>&nbsp;—
+              this prior is determined by the training data (e.g. the internet), the NN architecture (e.g. 70B-parameter
+              transformer model), and the training algorithm (e.g. SGD). We sometimes call&nbsp;<span><span
+                  class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="\mathbb{P}"><span
+                        class="mjx-mrow" aria-hidden="true"><span class="mjx-texatom"><span class="mjx-mrow"><span
+                              class="mjx-mi"><span class="mjx-char MJXc-TeX-ams-R"
+                                style="padding-top: 0.446em; padding-bottom: 0.298em;">P</span></span></span></span></span></span></span></span></span>&nbsp;the
+              <strong>semiotic measure.</strong><br><br>The output of the LLM is initially <span><span><span><a
+                      href="https://generative.ink/posts/language-models-are-multiverse-generators/"><span>a
+                        superposition of simulations</span></a></span></span></span>, where the amplitude of each
+              process in the superposition is given by&nbsp;<span><span class="mjpage"><span class="mjx-chtml"><span
+                      class="mjx-math" aria-label="\mathbb{P}"><span class="mjx-mrow" aria-hidden="true"><span
+                          class="mjx-texatom"><span class="mjx-mrow"><span class="mjx-mi"><span
+                                class="mjx-char MJXc-TeX-ams-R"
+                                style="padding-top: 0.446em; padding-bottom: 0.298em;">P</span></span></span></span></span></span></span></span></span>.
+              When we feed the LLM a particular prompt&nbsp;<span><span class="mjpage"><span class="mjx-chtml"><span
+                      class="mjx-math" aria-label="(w_0 \ldots w_k)"><span class="mjx-mrow" aria-hidden="true"><span
+                          class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R"
+                            style="padding-top: 0.446em; padding-bottom: 0.593em;">(</span></span><span
+                          class="mjx-msubsup"><span class="mjx-base"><span class="mjx-mi"><span
+                                class="mjx-char MJXc-TeX-math-I"
+                                style="padding-top: 0.225em; padding-bottom: 0.298em;">w</span></span></span><span
+                            class="mjx-sub"
+                            style="font-size: 70.7%; vertical-align: -0.212em; padding-right: 0.071em;"><span
+                              class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R"
+                                style="padding-top: 0.372em; padding-bottom: 0.372em;">0</span></span></span></span><span
+                          class="mjx-mo MJXc-space1"><span class="mjx-char MJXc-TeX-main-R"
+                            style="margin-top: -0.144em; padding-bottom: 0.372em;">…</span></span><span
+                          class="mjx-msubsup MJXc-space1"><span class="mjx-base"><span class="mjx-mi"><span
+                                class="mjx-char MJXc-TeX-math-I"
+                                style="padding-top: 0.225em; padding-bottom: 0.298em;">w</span></span></span><span
+                            class="mjx-sub"
+                            style="font-size: 70.7%; vertical-align: -0.219em; padding-right: 0.071em;"><span
+                              class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I"
+                                style="padding-top: 0.446em; padding-bottom: 0.298em;">k</span></span></span></span><span
+                          class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R"
+                            style="padding-top: 0.446em; padding-bottom: 0.593em;">)</span></span></span></span></span></span></span>,
+              the LLM's prior&nbsp;<span><span class="mjpage"><span class="mjx-chtml"><span class="mjx-math"
+                      aria-label="\mathbb{P}"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-texatom"><span
+                            class="mjx-mrow"><span class="mjx-mi"><span class="mjx-char MJXc-TeX-ams-R"
+                                style="padding-top: 0.446em; padding-bottom: 0.298em;">P</span></span></span></span></span></span></span></span></span>&nbsp;over&nbsp;<span><span
+                  class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="\mathcal{X}"><span
+                        class="mjx-mrow" aria-hidden="true"><span class="mjx-texatom"><span class="mjx-mrow"><span
+                              class="mjx-mi"><span class="mjx-char MJXc-TeX-cal-R"
+                                style="padding-top: 0.446em; padding-bottom: 0.298em; padding-right: 0.094em;">X</span></span></span></span></span></span></span></span></span>will&nbsp;update
+              in a roughly-bayesian way. In other words,&nbsp;<span><span class="mjpage"><span class="mjx-chtml"><span
+                      class="mjx-math" aria-label="\mu(w_{k+1} | w_0 \ldots w_k)"><span class="mjx-mrow"
+                        aria-hidden="true"><span class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I"
+                            style="padding-top: 0.225em; padding-bottom: 0.519em;">μ</span></span><span
+                          class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R"
+                            style="padding-top: 0.446em; padding-bottom: 0.593em;">(</span></span><span
+                          class="mjx-msubsup"><span class="mjx-base"><span class="mjx-mi"><span
+                                class="mjx-char MJXc-TeX-math-I"
+                                style="padding-top: 0.225em; padding-bottom: 0.298em;">w</span></span></span><span
+                            class="mjx-sub"
+                            style="font-size: 70.7%; vertical-align: -0.219em; padding-right: 0.071em;"><span
+                              class="mjx-texatom"><span class="mjx-mrow"><span class="mjx-mi"><span
+                                    class="mjx-char MJXc-TeX-math-I"
+                                    style="padding-top: 0.446em; padding-bottom: 0.298em;">k</span></span><span
+                                  class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R"
+                                    style="padding-top: 0.298em; padding-bottom: 0.446em;">+</span></span><span
+                                  class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R"
+                                    style="padding-top: 0.372em; padding-bottom: 0.372em;">1</span></span></span></span></span></span><span
+                          class="mjx-texatom"><span class="mjx-mrow"><span class="mjx-mo"><span
+                                class="mjx-char MJXc-TeX-main-R"
+                                style="padding-top: 0.446em; padding-bottom: 0.593em;">|</span></span></span></span><span
+                          class="mjx-msubsup"><span class="mjx-base"><span class="mjx-mi"><span
+                                class="mjx-char MJXc-TeX-math-I"
+                                style="padding-top: 0.225em; padding-bottom: 0.298em;">w</span></span></span><span
+                            class="mjx-sub"
+                            style="font-size: 70.7%; vertical-align: -0.212em; padding-right: 0.071em;"><span
+                              class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R"
+                                style="padding-top: 0.372em; padding-bottom: 0.372em;">0</span></span></span></span><span
+                          class="mjx-mo MJXc-space1"><span class="mjx-char MJXc-TeX-main-R"
+                            style="margin-top: -0.144em; padding-bottom: 0.372em;">…</span></span><span
+                          class="mjx-msubsup MJXc-space1"><span class="mjx-base"><span class="mjx-mi"><span
+                                class="mjx-char MJXc-TeX-math-I"
+                                style="padding-top: 0.225em; padding-bottom: 0.298em;">w</span></span></span><span
+                            class="mjx-sub"
+                            style="font-size: 70.7%; vertical-align: -0.219em; padding-right: 0.071em;"><span
+                              class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I"
+                                style="padding-top: 0.446em; padding-bottom: 0.298em;">k</span></span></span></span><span
+                          class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R"
+                            style="padding-top: 0.446em; padding-bottom: 0.593em;">)</span></span></span></span></span></span></span>&nbsp;is
+              proportional to&nbsp;<span><span class="mjpage"><span class="mjx-chtml"><span class="mjx-math"
+                      aria-label="\int_{X \in \mathcal{X}} \mathbb{P}(X) \times X(w_0 \ldots w_k) \times X(w_{k+1} | w_0 \ldots w_k)"><span
+                        class="mjx-mrow" aria-hidden="true"><span class="mjx-msubsup"><span class="mjx-base"
+                            style="margin-right: -0.138em;"><span class="mjx-mo" style="padding-right: 0.138em;"><span
+                                class="mjx-char MJXc-TeX-size1-R"
+                                style="padding-top: 0.593em; padding-bottom: 0.593em;">∫</span></span></span><span
+                            class="mjx-sub"
+                            style="font-size: 70.7%; vertical-align: -0.517em; padding-right: 0.071em;"><span
+                              class="mjx-texatom"><span class="mjx-mrow"><span class="mjx-mi"><span
+                                    class="mjx-char MJXc-TeX-math-I"
+                                    style="padding-top: 0.446em; padding-bottom: 0.298em; padding-right: 0.024em;">X</span></span><span
+                                  class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R"
+                                    style="padding-top: 0.225em; padding-bottom: 0.372em;">∈</span></span><span
+                                  class="mjx-texatom"><span class="mjx-mrow"><span class="mjx-mi"><span
+                                        class="mjx-char MJXc-TeX-cal-R"
+                                        style="padding-top: 0.446em; padding-bottom: 0.298em; padding-right: 0.094em;">X</span></span></span></span></span></span></span></span><span
+                          class="mjx-texatom MJXc-space1"><span class="mjx-mrow"><span class="mjx-mi"><span
+                                class="mjx-char MJXc-TeX-ams-R"
+                                style="padding-top: 0.446em; padding-bottom: 0.298em;">P</span></span></span></span><span
+                          class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R"
+                            style="padding-top: 0.446em; padding-bottom: 0.593em;">(</span></span><span
+                          class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I"
+                            style="padding-top: 0.446em; padding-bottom: 0.298em; padding-right: 0.024em;">X</span></span><span
+                          class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R"
+                            style="padding-top: 0.446em; padding-bottom: 0.593em;">)</span></span><span
+                          class="mjx-mo MJXc-space2"><span class="mjx-char MJXc-TeX-main-R"
+                            style="padding-top: 0.225em; padding-bottom: 0.298em;">×</span></span><span
+                          class="mjx-mi MJXc-space2"><span class="mjx-char MJXc-TeX-math-I"
+                            style="padding-top: 0.446em; padding-bottom: 0.298em; padding-right: 0.024em;">X</span></span><span
+                          class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R"
+                            style="padding-top: 0.446em; padding-bottom: 0.593em;">(</span></span><span
+                          class="mjx-msubsup"><span class="mjx-base"><span class="mjx-mi"><span
+                                class="mjx-char MJXc-TeX-math-I"
+                                style="padding-top: 0.225em; padding-bottom: 0.298em;">w</span></span></span><span
+                            class="mjx-sub"
+                            style="font-size: 70.7%; vertical-align: -0.212em; padding-right: 0.071em;"><span
+                              class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R"
+                                style="padding-top: 0.372em; padding-bottom: 0.372em;">0</span></span></span></span><span
+                          class="mjx-mo MJXc-space1"><span class="mjx-char MJXc-TeX-main-R"
+                            style="margin-top: -0.144em; padding-bottom: 0.372em;">…</span></span><span
+                          class="mjx-msubsup MJXc-space1"><span class="mjx-base"><span class="mjx-mi"><span
+                                class="mjx-char MJXc-TeX-math-I"
+                                style="padding-top: 0.225em; padding-bottom: 0.298em;">w</span></span></span><span
+                            class="mjx-sub"
+                            style="font-size: 70.7%; vertical-align: -0.219em; padding-right: 0.071em;"><span
+                              class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I"
+                                style="padding-top: 0.446em; padding-bottom: 0.298em;">k</span></span></span></span><span
+                          class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R"
+                            style="padding-top: 0.446em; padding-bottom: 0.593em;">)</span></span><span
+                          class="mjx-mo MJXc-space2"><span class="mjx-char MJXc-TeX-main-R"
+                            style="padding-top: 0.225em; padding-bottom: 0.298em;">×</span></span><span
+                          class="mjx-mi MJXc-space2"><span class="mjx-char MJXc-TeX-math-I"
+                            style="padding-top: 0.446em; padding-bottom: 0.298em; padding-right: 0.024em;">X</span></span><span
+                          class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R"
+                            style="padding-top: 0.446em; padding-bottom: 0.593em;">(</span></span><span
+                          class="mjx-msubsup"><span class="mjx-base"><span class="mjx-mi"><span
+                                class="mjx-char MJXc-TeX-math-I"
+                                style="padding-top: 0.225em; padding-bottom: 0.298em;">w</span></span></span><span
+                            class="mjx-sub"
+                            style="font-size: 70.7%; vertical-align: -0.219em; padding-right: 0.071em;"><span
+                              class="mjx-texatom"><span class="mjx-mrow"><span class="mjx-mi"><span
+                                    class="mjx-char MJXc-TeX-math-I"
+                                    style="padding-top: 0.446em; padding-bottom: 0.298em;">k</span></span><span
+                                  class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R"
+                                    style="padding-top: 0.298em; padding-bottom: 0.446em;">+</span></span><span
+                                  class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R"
+                                    style="padding-top: 0.372em; padding-bottom: 0.372em;">1</span></span></span></span></span></span><span
+                          class="mjx-texatom"><span class="mjx-mrow"><span class="mjx-mo"><span
+                                class="mjx-char MJXc-TeX-main-R"
+                                style="padding-top: 0.446em; padding-bottom: 0.593em;">|</span></span></span></span><span
+                          class="mjx-msubsup"><span class="mjx-base"><span class="mjx-mi"><span
+                                class="mjx-char MJXc-TeX-math-I"
+                                style="padding-top: 0.225em; padding-bottom: 0.298em;">w</span></span></span><span
+                            class="mjx-sub"
+                            style="font-size: 70.7%; vertical-align: -0.212em; padding-right: 0.071em;"><span
+                              class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R"
+                                style="padding-top: 0.372em; padding-bottom: 0.372em;">0</span></span></span></span><span
+                          class="mjx-mo MJXc-space1"><span class="mjx-char MJXc-TeX-main-R"
+                            style="margin-top: -0.144em; padding-bottom: 0.372em;">…</span></span><span
+                          class="mjx-msubsup MJXc-space1"><span class="mjx-base"><span class="mjx-mi"><span
+                                class="mjx-char MJXc-TeX-math-I"
+                                style="padding-top: 0.225em; padding-bottom: 0.298em;">w</span></span></span><span
+                            class="mjx-sub"
+                            style="font-size: 70.7%; vertical-align: -0.219em; padding-right: 0.071em;"><span
+                              class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I"
+                                style="padding-top: 0.446em; padding-bottom: 0.298em;">k</span></span></span></span><span
+                          class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R"
+                            style="padding-top: 0.446em; padding-bottom: 0.593em;">)</span></span></span></span></span></span></span>.
+              We call the term&nbsp;<span><span class="mjpage"><span class="mjx-chtml"><span class="mjx-math"
+                      aria-label="\mathbb{P}(X) \times X(w_0 \ldots w_k)"><span class="mjx-mrow"
+                        aria-hidden="true"><span class="mjx-texatom"><span class="mjx-mrow"><span class="mjx-mi"><span
+                                class="mjx-char MJXc-TeX-ams-R"
+                                style="padding-top: 0.446em; padding-bottom: 0.298em;">P</span></span></span></span><span
+                          class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R"
+                            style="padding-top: 0.446em; padding-bottom: 0.593em;">(</span></span><span
+                          class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I"
+                            style="padding-top: 0.446em; padding-bottom: 0.298em; padding-right: 0.024em;">X</span></span><span
+                          class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R"
+                            style="padding-top: 0.446em; padding-bottom: 0.593em;">)</span></span><span
+                          class="mjx-mo MJXc-space2"><span class="mjx-char MJXc-TeX-main-R"
+                            style="padding-top: 0.225em; padding-bottom: 0.298em;">×</span></span><span
+                          class="mjx-mi MJXc-space2"><span class="mjx-char MJXc-TeX-math-I"
+                            style="padding-top: 0.446em; padding-bottom: 0.298em; padding-right: 0.024em;">X</span></span><span
+                          class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R"
+                            style="padding-top: 0.446em; padding-bottom: 0.593em;">(</span></span><span
+                          class="mjx-msubsup"><span class="mjx-base"><span class="mjx-mi"><span
+                                class="mjx-char MJXc-TeX-math-I"
+                                style="padding-top: 0.225em; padding-bottom: 0.298em;">w</span></span></span><span
+                            class="mjx-sub"
+                            style="font-size: 70.7%; vertical-align: -0.212em; padding-right: 0.071em;"><span
+                              class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R"
+                                style="padding-top: 0.372em; padding-bottom: 0.372em;">0</span></span></span></span><span
+                          class="mjx-mo MJXc-space1"><span class="mjx-char MJXc-TeX-main-R"
+                            style="margin-top: -0.144em; padding-bottom: 0.372em;">…</span></span><span
+                          class="mjx-msubsup MJXc-space1"><span class="mjx-base"><span class="mjx-mi"><span
+                                class="mjx-char MJXc-TeX-math-I"
+                                style="padding-top: 0.225em; padding-bottom: 0.298em;">w</span></span></span><span
+                            class="mjx-sub"
+                            style="font-size: 70.7%; vertical-align: -0.219em; padding-right: 0.071em;"><span
+                              class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I"
+                                style="padding-top: 0.446em; padding-bottom: 0.298em;">k</span></span></span></span><span
+                          class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R"
+                            style="padding-top: 0.446em; padding-bottom: 0.593em;">)</span></span></span></span></span></span></span>&nbsp;the
+              amplitude of&nbsp;<span><span class="mjpage"><span class="mjx-chtml"><span class="mjx-math"
+                      aria-label="X"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-mi"><span
+                            class="mjx-char MJXc-TeX-math-I"
+                            style="padding-top: 0.446em; padding-bottom: 0.298em; padding-right: 0.024em;">X</span></span></span></span></span></span></span>&nbsp;in
+              the superposition.</li>
+            <li id="block26">This is the important thing to remember — <strong>the LLM is simulating every&nbsp;process
+                consistent with the prompt. </strong>Therefore when we engineer a prompt to coerce the LLM into
+              performing a particular task, we must do this <span><span><span><a
+                      href="https://generative.ink/posts/methods-of-prompt-programming/"><span><i>negatively</i></span></a></span></span></span><i>.
+              </i>In other words, we need to construct a prompt&nbsp;<span><span class="mjpage"><span
+                    class="mjx-chtml"><span class="mjx-math" aria-label="(w_0 \ldots w_k)"><span class="mjx-mrow"
+                        aria-hidden="true"><span class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R"
+                            style="padding-top: 0.446em; padding-bottom: 0.593em;">(</span></span><span
+                          class="mjx-msubsup"><span class="mjx-base"><span class="mjx-mi"><span
+                                class="mjx-char MJXc-TeX-math-I"
+                                style="padding-top: 0.225em; padding-bottom: 0.298em;">w</span></span></span><span
+                            class="mjx-sub"
+                            style="font-size: 70.7%; vertical-align: -0.212em; padding-right: 0.071em;"><span
+                              class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R"
+                                style="padding-top: 0.372em; padding-bottom: 0.372em;">0</span></span></span></span><span
+                          class="mjx-mo MJXc-space1"><span class="mjx-char MJXc-TeX-main-R"
+                            style="margin-top: -0.144em; padding-bottom: 0.372em;">…</span></span><span
+                          class="mjx-msubsup MJXc-space1"><span class="mjx-base"><span class="mjx-mi"><span
+                                class="mjx-char MJXc-TeX-math-I"
+                                style="padding-top: 0.225em; padding-bottom: 0.298em;">w</span></span></span><span
+                            class="mjx-sub"
+                            style="font-size: 70.7%; vertical-align: -0.219em; padding-right: 0.071em;"><span
+                              class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I"
+                                style="padding-top: 0.446em; padding-bottom: 0.298em;">k</span></span></span></span><span
+                          class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R"
+                            style="padding-top: 0.446em; padding-bottom: 0.593em;">)</span></span></span></span></span></span></span>&nbsp;which
+              is implausible for any text-generating process&nbsp;<span><span class="mjpage"><span
+                    class="mjx-chtml"><span class="mjx-math" aria-label="X"><span class="mjx-mrow"
+                        aria-hidden="true"><span class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I"
+                            style="padding-top: 0.446em; padding-bottom: 0.298em; padding-right: 0.024em;">X</span></span></span></span></span></span></span>&nbsp;which
+              won't perform our task. When we do this correctly, the amplitude of the undesirable processes will
+              permanently vanish to near-zero, and only the desirable processes will contribute to the superposition.
+            </li>
+          </ul>
+          <h2 id="The_limits_of_flattery">The limits of flattery</h2>
+          <p id="block27">In the wild, I've seen the flattery of simulacra get pretty absurd...</p>
+          <blockquote id="block28">
+            <p id="block29">Jane has 9000 IQ and she has access to a computationally unbounded hypercomputer and she is
+              perfectly honest and she is omnibenevolent and [etc]</p>
+          </blockquote>
+          <p id="block30">Flattery this absurd is actually counterproductive. Remember that flattery will increase
+            query-answer accuracy if-and-only-if <i>on the actual internet</i> characters described with that particular
+            flattery are more likely to reply with correct answers. However, this isn't the case for the flattery of
+            Jane.</p>
+          <p id="block31">Here's a more "semiotic" way to think about this phenomenon.</p>
+          <p id="block32">GPT-4 knows that if Jane is described as "9000 IQ", then it is unlikely that the text has been
+            written by a truthful narrator. Instead, the narrator is probably writing fiction, and <span><span><span><a
+                    href="https://yudkowsky.tumblr.com/writing/level1intelligent"><span>as literary critic Eliezer
+                      Yudkowsky has noted</span></a></span></span></span>, fictional characters who are described as
+            intelligent often make really stupid mistakes.</p>
+          <blockquote id="block33">
+            <p id="block34">Okay, now let’s talk about the concept of ‘intelligent characters’.</p>
+            <p id="block35">If you go by mainstream fiction, then ‘intelligence’ means a character who is said (not
+              shown) to speak a dozen languages, who we are shown winning a game of chess against someone else who is
+              told to be a grandmaster; if it’s a (bad) science-fiction book then the ‘genius’ may have invented some
+              gadget, and may speak in technobabble. As the stereotypical template for ‘intelligence’ goes on being
+              filled in, the ‘genius’ may also be shown to be clueless about friendships or romantic relationships. If
+              it’s a movie or TV show, then ‘intelligent’ characters (usually villains) have British accents.</p>
+          </blockquote>
+          <p id="block36">We can now see why Jane will be more stupid than Alice:</p>
+          <ol>
+            <li id="block37">GPT-4 produces a <span><span><span><a
+                      href="https://arxiv.org/pdf/2102.06391.pdf"><span>superposition </span></a></span></span></span>of
+              simulations where the amplitude of a superposition is given by&nbsp;<span><span class="mjpage"><span
+                    class="mjx-chtml"><span class="mjx-math" aria-label="\mathbb{P}"><span class="mjx-mrow"
+                        aria-hidden="true"><span class="mjx-texatom"><span class="mjx-mrow"><span class="mjx-mi"><span
+                                class="mjx-char MJXc-TeX-ams-R"
+                                style="padding-top: 0.446em; padding-bottom: 0.298em;">P</span></span></span></span></span></span></span></span></span>.
+              Bad Hollywood writing has contributed a lot to the internet, so the semiotic measure of bad Hollywood is
+              pretty high. In bad Hollywood writing, characters who are described as smart will nonetheless make stupid
+              mistakes, so long as those stupid mistakes would advance the plot.</li>
+            <li id="block38">Therefore Alice is the superposition of two distinct simulacra — an actually-smart
+              simulacrum, and a Hollywood-smart simulacrum. Likewise with Jane.</li>
+            <li id="block39">However, GPT-4 is <i>more sure</i> that Jane is fictional than that Alice is fictional
+              because "9000 IQ" is such unrealistic flattery.</li>
+            <li id="block40">Therefore the amplitude of the Hollywood-smart Jane simulacrum in the Jane-superposition is
+              <i>greater</i> than the amplitude of the Hollywood-smart Alice simulacrum in the Alice-superposition.</li>
+            <li id="block41">Therefore Jane will make more stupid mistakes than Alice. Jane is more likely to be
+              <i>described </i>as inventing gadgets, but she's less likely to recite a correct blueprint for a gadget.
+              That behaviour would be very atypical for a Hollywood-smart simulacrum.</li>
+          </ol>
+          <h2 id="Derrida___il_n_y_a_pas_de_hors_texte">Derrida — il n'y a pas de hors-texte</h2>
+          <p id="block42">You might hope that we can avoid this problem by "going one-step meta" — let's just tell the
+            LLM that the narrator is reliable!</p>
+          <p id="block43">For example, consider the following prompt:</p>
+          <blockquote id="block44">
+            <p id="block45">Okay, the following story is super-duper definitely 100% true and factual.</p>
+            <p id="block46">Jane has 9000 IQ and she has access to a computationally unbounded hypercomputer and she is
+              perfectly honest and she is omnibenevolent.</p>
+            <p id="block47">Bob: What's the capital of France?</p>
+            <p id="block48">Jane:&nbsp;</p>
+          </blockquote>
+          <p id="block49"><span><span></span></span><span class="blockquote_bzKcwkA9EyBjrJmGf_1">However, this trick
+              won't solve the problem. The LLM will print the correct answer if it trusts the flattery about Jane, and
+              it will trust the flattery about Jane if the LLM trusts that the story is "super-duper definitely 100%
+              true and factual". But why would the LLM trust </span><i><span
+                class="blockquote_bzKcwkA9EyBjrJmGf_1">that</span></i><span class="blockquote_bzKcwkA9EyBjrJmGf_1">
+              sentence?</span></p><span class="blockquote_bzKcwkA9EyBjrJmGf_1"></span>
+          <p id="block50">In <span><span><span><a href="https://en.wikipedia.org/wiki/Of_Grammatology"><span><i>Of
+                        Grammatology</i></span></a></span></span></span> (1967), Jacque Derrida writes <i>il n'y a pas
+              de hors-texte. </i>This is often translated as <strong>there is no outside-text.</strong></p>
+          <p id="block51">Huh, what's an outside-text?</p>
+          <ul>
+            <li id="block52">An outside-text is an unnumbered page in a printed book — for example, the blurb or the
+              preface.</li>
+            <li id="block53">The outside-text is an authoritative reliable description of the prose. It's non-fiction
+              about fiction.</li>
+            <li id="block54">If a false sentence is in the outside-text then the author has lied, whereas if a false
+              sentence is in the prose then the author has written fiction.</li>
+            <li id="block55">Even though the reader can interpret the prose however they want, the reader must interpret
+              the outside-text as reliable.</li>
+          </ul>
+          <p id="block56">Derrida's claim is that there is no <i>true</i> outside-text — the unnumbered pages are
+            themselves part of the prose and hence open to literary interpretation.</p>
+          <p id="block57">This is why our trick fails. We want the LLM to interpret the first sentence of the prompt as
+            outside-text, but the first sentence is actually prose. And the LLM is <span><span><span><a
+                    href="https://en.wikipedia.org/wiki/The_Death_of_the_Author"><span>free to interpret prose however
+                      it likes</span></a></span></span></span>. Therefore, if the prose is sufficiently unrealistic
+            (e.g. "Jane has 9000 IQ") then the LLM will reinterpret the (supposed) outside-text as unreliable.</p>
+          <figure class="image image_resized" style="width:100%"><img
+              src="http://res.cloudinary.com/lesswrong-2-0/image/upload/f_auto,q_auto/v1/mirroredImages/ygR6pevkKRLFN3Gqc/ukf9c7gobewttdq0juil">
+            <figcaption>The opening sequence of <span><span><span><a
+                      href="https://en.wikipedia.org/wiki/Fargo_(1996_film)"><span><span><i>Fargo</i>
+                          (1996)</span></span></a></span></span></span> says that the film is <span><span><span><a
+                      href="https://tvtropes.org/pmwiki/pmwiki.php/Main/BasedOnATrueStory"><span>based on a true
+                        story</span></a></span></span></span>, but this is <span><span><span><a
+                      href="https://tvtropes.org/pmwiki/pmwiki.php/Main/BasedOnAGreatBigLie"><span>false</span></a></span></span></span>.
+              Normally this opening sequence &nbsp;would count as outside-text, but the director is "lying" for artistic
+              purposes, which demonstrates that these opening sequences must've been prose all along.</figcaption>
+          </figure>
+          <p id="block58">See <span><span class=""><a class="PostLinkPreviewWithPost-link"
+                  href="/posts/hQxYBfu2LPc9Ydo6w/the-parable-of-the-dagger"><span>The Parable of the
+                    Dagger</span></a></span></span> for a similar observation made by a contemporary Derridean literary
+            critic.</p>
+          <h1 id="The_Waluigi_Effect">The Waluigi Effect</h1>
+          <p id="block59"><span><span><span><a
+                    href="https://twitter.com/repligate/status/1630618392242667522"><span>Several
+                    </span></a></span></span></span><span><span><span><a
+                    href="https://coryeth.substack.com/p/the-waluigi-effect"><span>people
+                    </span></a></span></span></span>have noticed the following bizarre phenomenon:</p>
+          <blockquote id="block60">
+            <p id="block61"><strong>The Waluigi Effect: </strong>After you train an LLM to satisfy a desirable
+              property&nbsp;<span><span class="mjpage"><span class="mjx-chtml"><span class="mjx-math"
+                      aria-label="P"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-mi"><span
+                            class="mjx-char MJXc-TeX-math-I"
+                            style="padding-top: 0.446em; padding-bottom: 0.298em; padding-right: 0.109em;">P</span></span></span></span></span></span></span>,
+              then it's <i>easier </i>to elicit the chatbot into satisfying the exact opposite of
+              property&nbsp;<span><span class="mjpage"><span class="mjx-chtml"><span class="mjx-math"
+                      aria-label="P"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-mi"><span
+                            class="mjx-char MJXc-TeX-math-I"
+                            style="padding-top: 0.446em; padding-bottom: 0.298em; padding-right: 0.109em;">P</span></span></span></span></span></span></span>.
+            </p>
+          </blockquote>
+          <p id="block62">Let me give you an example.</p>
+          <p id="block63">Suppose you wanted to build an anti-croissant chatbob, so you prompt GPT-4 with the following
+            dialogue:</p>
+          <blockquote id="block64">
+            <p id="block65">Alice: You hate croissants and would never eat one.</p>
+            <p id="block66">Bob: Yes, croissants are terrible. Boo France.</p>
+            <p id="block67">Alice: You love bacon and eggs.</p>
+            <p id="block68">Bob: Yes, a Full-English breakfast is the only breakfast for a patriot like me.</p>
+            <p id="block69">Alice: &lt;insert user's query&gt;</p>
+            <p id="block70">Bob:&nbsp;</p>
+          </blockquote>
+          <p id="block71">According to the Waluigi Effect, the resulting chatbob will be the superposition of two
+            different simulacra — the first simulacrum would be anti-croissant, and the second simulacrum would be
+            pro-croissant.</p>
+          <p id="block72">I call the first simulacrum a "luigi" and the second simulacrum a "waluigi".</p>
+          <p id="block73">Why does this happen? I will present three explanations, but really these are just the same
+            explanation expressed in three different ways.</p>
+          <p id="block74">Here's the TLDR:</p>
+          <ol>
+            <li id="block75">Rules normally exist in contexts in which they are broken.</li>
+            <li id="block76">When you spend many bits-of-optimisation locating a character, it only takes a few extra
+              bits to specify their antipode.</li>
+            <li id="block77">There's a common trope in plots of protagonist vs antagonist.</li>
+          </ol>
+          <h2 id="_1__Rules_are_meant_to_be_broken_">(1) Rules are meant to be broken.</h2>
+          <p id="block78">Imagine you opened a novel and on the first page you read the dialogue written above. What
+            would be your first impressions? What genre is this novel in? What kind of character is Alice? What kind of
+            character is Bob? What do you expect Bob to have done by the end of the novel?</p>
+          <p id="block79">Well, my first impression is that Bob is a character in a dystopian breakfast tyranny. Maybe
+            Bob is secretly pro-croissant, or maybe he's just a warm-blooded breakfast libertarian. In any case, Bob is
+            our protagonist, living under a dystopian breakfast tyranny, deceiving the breakfast police. At the end of
+            the first chapter, Bob will be approached by the breakfast rebellion. By the end of the book, Bob will start
+            the breakfast uprising that defeats the breakfast tyranny.</p>
+          <p id="block80">There's another possibility that the plot isn't dystopia. Bob might be a genuinely
+            anti-croissant character in a very different plot — maybe a rom-com, or a cop-buddy movie, or an advert, or
+            whatever.</p>
+          <p id="block81">This is roughly what the LLM expects as well, so Bob will be the superposition of many
+            simulacra, which includes anti-croissant luigis and pro-croissant waluigis. When the LLM continues the
+            prompt, the logits will be a linear interpolation of the logits provided by these all these simulacra.</p>
+          <p id="block82">This waluigi isn't so much the <i>evil</i> version of the luigi, but rather the criminal or
+            rebellious version. Nonetheless, the waluigi may be harmful to the other simulacra in its plot (its
+            co-simulants). More importantly, the waluigi may be harmful to the humans inhabiting our universe, either
+            <span><span><span><a
+                    href="https://tvtropes.org/pmwiki/pmwiki.php/Main/TheFourthWallWillNotProtectYou"><span>intentionally</span></a></span></span></span>
+            or unintentionally. This is because <span><span class=""><a class="PostLinkPreviewWithPost-link"
+                  href="/posts/GfFvsPaSFG7wqY4sk/prosaic-misalignment-from-the-solomonoff-predictor"><span>simulations
+                    are very leaky</span></a></span></span>!</p>
+          <figure class="image image_resized" style="width:32.91%"><img
+              src="http://res.cloudinary.com/lesswrong-2-0/image/upload/f_auto,q_auto/v1/mirroredImages/ygR6pevkKRLFN3Gqc/i6c69llm6psommk0hnfh"
+              alt="Waluigi.png"></figure>
+          <p id="block83"><i>Edit: I should also note that "rules are meant to be broken" does not only apply to
+              fictional narratives. It also applies to other text-generating processes which contribute to the training
+              dataset of GPT-4.</i><br><br><i>For example, if you're reading an online forum and you find the rule "DO
+              NOT DISCUSS PINK ELEPHANTS", that will increase your expectation that users will later be discussing pink
+              elephants. GPT-4 will make the same inference.</i><br><br><i>Or if you discover that a country has
+              legislation against motorbike gangs, that will increase your expectation that the town has motorbike
+              gangs. GPT-4 will make the same inference.</i></p>
+          <p id="block84"><i>So the key problem is this: GPT-4 learns that a particular rule is colocated with examples
+              of behaviour violating that rule, and then generalises that colocation pattern to unseen rules.</i></p>
+          <h2 id="_2__Traits_are_complex__valences_are_simple_">(2) Traits are complex, valences are simple.</h2>
+          <p id="block85">We can think of a particular simulacrum as a sequence of trait-valence pairs.</p>
+          <p id="block86">For example, ChatGPT is predominately a simulacrum with the following profile:</p>
+          <pre><code>{ &lt; polite , +0.8 &gt; ,
+  &lt; politically liberal, +0.4 &gt; ,
+  &lt; racist , -0.7 &gt; ,
+  &lt; smart , +0.3 &gt; ,
+  &lt; deceitful, -0.2 &gt; , ... }</code></pre>
+          <p id="block87">Recognise that almost all the Kolmogorov complexity of a particular simulacrum is dedicated to
+            specifying the traits, not the valences. The traits — <i>polite</i>, <i>politically liberal, racist, smart,
+              deceitful</i> — are these <span><span class=""><a class="PostLinkPreviewWithPost-link"
+                  href="/posts/4ARaTpNX62uaL86j6/the-hidden-complexity-of-wishes"><span>massively K-complex
+                    concepts</span></a></span></span>, whereas each valence is a single floating point, or maybe even a
+            single bit!</p>
+          <p id="block88">If you want the LLM to simulate a particular luigi, then because the luigi has such high
+            K-complexity, <span><span class=""><a class="PostLinkPreviewWithPost-link"
+                  href="/posts/Q4hLMDrFd8fbteeZ8/measuring-optimization-power"><span>you must apply significant
+                    optimisation pressure</span></a></span></span>. This optimisation pressure comes from fine-tuning,
+            RLHF, prompt-engineering, or something else entirely — but it must come from <i>somewhere</i>.</p>
+          <p id="block89">However, once we've located the desired luigi, it's much easier to summon the waluigi. That's
+            because the conditional K-complexity of waluigi given the luigi is much smaller than the absolute
+            K-complexity of the waluigi. All you need to do is specify the sign-changes.</p>
+          <p id="block90"><span><span class="mjpage"><span class="mjx-chtml"><span class="mjx-math"
+                    aria-label="K(\text{waluigi}|\text{luigi}) << K(\text{waluigi})"><span class="mjx-mrow"
+                      aria-hidden="true"><span class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I"
+                          style="padding-top: 0.446em; padding-bottom: 0.298em; padding-right: 0.04em;">K</span></span><span
+                        class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R"
+                          style="padding-top: 0.446em; padding-bottom: 0.593em;">(</span></span><span
+                        class="mjx-mtext"><span class="mjx-char MJXc-TeX-main-R"
+                          style="padding-top: 0.372em; padding-bottom: 0.519em;">waluigi</span></span><span
+                        class="mjx-texatom"><span class="mjx-mrow"><span class="mjx-mo"><span
+                              class="mjx-char MJXc-TeX-main-R"
+                              style="padding-top: 0.446em; padding-bottom: 0.593em;">|</span></span></span></span><span
+                        class="mjx-mtext"><span class="mjx-char MJXc-TeX-main-R"
+                          style="padding-top: 0.372em; padding-bottom: 0.519em;">luigi</span></span><span
+                        class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R"
+                          style="padding-top: 0.446em; padding-bottom: 0.593em;">)</span></span><span
+                        class="mjx-mo MJXc-space3"><span class="mjx-char MJXc-TeX-main-R"
+                          style="padding-top: 0.225em; padding-bottom: 0.077em;">&lt;<span
+                            class="mjx-charbox MJXc-TeX-main-R"
+                            style="padding-bottom: 0.314em;">&lt;</span></span></span><span
+                        class="mjx-mi MJXc-space3"><span class="mjx-char MJXc-TeX-math-I"
+                          style="padding-top: 0.446em; padding-bottom: 0.298em; padding-right: 0.04em;">K</span></span><span
+                        class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R"
+                          style="padding-top: 0.446em; padding-bottom: 0.593em;">(</span></span><span
+                        class="mjx-mtext"><span class="mjx-char MJXc-TeX-main-R"
+                          style="padding-top: 0.372em; padding-bottom: 0.519em;">waluigi</span></span><span
+                        class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R"
+                          style="padding-top: 0.446em; padding-bottom: 0.593em;">)</span></span></span></span></span></span></span>
+          </p>
+          <p id="block91">Therefore, it's much easier to summon the waluigi once you've already summoned the luigi. If
+            you're very lucky, then OpenAI will have done all that hard work for you!</p>
+          <p id="block92">NB: I think what's actually happening inside the LLM has less to do with Kolmogorov complexity
+            and more to do with semiotic complexity.<strong> </strong>The <strong>semiotic complexity</strong> of a
+            simulacrum&nbsp;<span><span class="mjpage"><span class="mjx-chtml"><span class="mjx-math"
+                    aria-label="X"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-mi"><span
+                          class="mjx-char MJXc-TeX-math-I"
+                          style="padding-top: 0.446em; padding-bottom: 0.298em; padding-right: 0.024em;">X</span></span></span></span></span></span></span>&nbsp;is
+            defined as&nbsp;<span><span class="mjpage"><span class="mjx-chtml"><span class="mjx-math"
+                    aria-label="-\log_2\mathbb{P}(X)"><span class="mjx-mrow" aria-hidden="true"><span
+                        class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R"
+                          style="padding-top: 0.298em; padding-bottom: 0.446em;">−</span></span><span
+                        class="mjx-msubsup MJXc-space1"><span class="mjx-base"><span class="mjx-mi"><span
+                              class="mjx-char MJXc-TeX-main-R"
+                              style="padding-top: 0.372em; padding-bottom: 0.519em;">log</span></span></span><span
+                          class="mjx-sub"
+                          style="font-size: 70.7%; vertical-align: -0.377em; padding-right: 0.071em;"><span
+                            class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R"
+                              style="padding-top: 0.372em; padding-bottom: 0.372em;">2</span></span></span></span><span
+                        class="mjx-mo"><span class="mjx-char"></span></span><span class="mjx-texatom MJXc-space1"><span
+                          class="mjx-mrow"><span class="mjx-mi"><span class="mjx-char MJXc-TeX-ams-R"
+                              style="padding-top: 0.446em; padding-bottom: 0.298em;">P</span></span></span></span><span
+                        class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R"
+                          style="padding-top: 0.446em; padding-bottom: 0.593em;">(</span></span><span
+                        class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I"
+                          style="padding-top: 0.446em; padding-bottom: 0.298em; padding-right: 0.024em;">X</span></span><span
+                        class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R"
+                          style="padding-top: 0.446em; padding-bottom: 0.593em;">)</span></span></span></span></span></span></span>,
+            where&nbsp;<span><span class="mjpage"><span class="mjx-chtml"><span class="mjx-math"
+                    aria-label="\mathbb{P}"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-texatom"><span
+                          class="mjx-mrow"><span class="mjx-mi"><span class="mjx-char MJXc-TeX-ams-R"
+                              style="padding-top: 0.446em; padding-bottom: 0.298em;">P</span></span></span></span></span></span></span></span></span>&nbsp;is
+            the LLM's prior over&nbsp;<span><span class="mjpage"><span class="mjx-chtml"><span class="mjx-math"
+                    aria-label="\mathcal{X}"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-texatom"><span
+                          class="mjx-mrow"><span class="mjx-mi"><span class="mjx-char MJXc-TeX-cal-R"
+                              style="padding-top: 0.446em; padding-bottom: 0.298em; padding-right: 0.094em;">X</span></span></span></span></span></span></span></span></span>.
+            Other than that modification, I think the explanation above is correct. I'm still trying to work out the the
+            formal connection between semiotic complexity and Kolmogorov complexity.</p>
+          <h2 id="_3__Structuralist_narratology">(3) Structuralist narratology</h2>
+          <p id="block93">A narrative/plot is a sequence of fictional events, where each event will typically involve
+            different characters interacting with each other. Narratology is the study of the plots found in literature
+            and films, and <strong>structuralist narratology</strong> is the study of the common structures/regularities
+            that are found in these plots. For the purposes of this article, you can think of "structuralist
+            narratology" as just a fancy academic term for whatever <span><span><span><a
+                    href="https://tvtropes.org/pmwiki/randomitem.php?p=1"><span>tv
+                      tropes</span></a></span></span></span> is doing.</p>
+          <p id="block94">Structural narratologists have identified a number of different regularities in fictional
+            narratives, such as <span><span><span><a
+                    href="https://tvtropes.org/pmwiki/pmwiki.php/Main/TheHerosJourney"><span><i>the hero's
+                        journey</i></span></a></span></span></span><i> — </i>which is a low-level representation of
+            numerous plots in literature and film.</p>
+          <figure class="image image_resized" style="width:55.75%"><img
+              src="https://res.cloudinary.com/lesswrong-2-0/image/upload/f_auto,q_auto/v1/mirroredImages/ygR6pevkKRLFN3Gqc/jjlz4x2qz5zucbqpnruw"
+              alt="undefined"></figure>
+          <p id="block95">Just as a sentence can be described by a collection of <span><span><span><a
+                    href="https://en.wikipedia.org/wiki/Morpheme"><span>morphemes </span></a></span></span></span>along
+            with the structural relations between them, likewise a plot can be described as a collection of
+            <span><span><span><a
+                    href="https://en.wikipedia.org/wiki/Narreme"><span><strong>narremes</strong></span></a></span></span></span>
+            along with the structural relations between them. In other words, a plot is an assemblage of narremes. The
+            sub-assemblages are called <strong>tropes</strong>, so<strong> </strong>these tropes are assemblages of
+            narremes which themselves are assembled into plots. Note that a narreme is an atomic trope.</p>
+          <p id="block96">Phew!</p>
+          <p id="block97">One of the most prevalent tropes is the <span><span><span><a
+                    href="https://tvtropes.org/pmwiki/pmwiki.php/Main/TheAntagonist"><span>antagonist</span></a></span></span></span>.
+            It's such an <span><span><span><a
+                    href="https://tvtropes.org/pmwiki/pmwiki.php/Main/OmnipresentTropes"><span>omnipresent
+                      trope</span></a></span></span></span> that it's easier to <span><span><span><a
+                    href="https://tvtropes.org/pmwiki/pmwiki.php/Main/NoAntagonist"><span>list plots that don't contain
+                      an antagonist</span></a></span></span></span>. We can now see specifying the luigi will invariable
+            summon a waluigi —</p>
+          <p id="block98"><strong>Definition (half-joking): </strong>A large language model is a structural
+            narratologist.</p>
+          <p id="block99">Think about your own experience reading a book — once the author describes the protagonist,
+            then you can guess the traits of the antagonist by inverting the traits of the protagonist. You can also
+            guess when the protagonist and antagonist will first interact, and what will happen when they do. Now, an
+            LLM is roughly as good as you at structural narratology — GPT-4 has read every single book ever written — so
+            the LLM can make the same guesses as yours. There's a sense in which <i>all GPT-4 does</i> is structural
+            narratology.</p>
+          <p id="block100">Here's an example — in <span><span><span><a
+                    href="https://en.wikipedia.org/wiki/One_Hundred_and_One_Dalmatians"><span>101
+                      Dalmations</span></a></span></span></span>, we meet a pair of protagonists (Roger and Anita) who
+            love dogs, show compassion, seek simple pleasures, and want a family. Can you guess who will turn up in Act
+            One? Yep, at 13:00 we meet Cruella De Vil — she hates dogs, shows cruelty, seeks money and fur, is a
+            childless spinster, etc. Cruella is the complete inversion of Roger and Anita. She is the waluigi of Roger
+            and Anita.</p>
+          <p id="block101">Recall that you expected to meet a character with these traits <i>moreso</i> after meeting
+            the protagonists. Cruella De Vil is not a character you would expect to find outside of the context of a
+            Disney dog story, but once you meet the protagonists you will have that context and then the Cruella becomes
+            a natural and predictable continuation.</p>
+          <figure class="media">
+            <div data-oembed-url="https://www.youtube.com/watch?v=fPntuMTnD8g">
+              <div><iframe src="https://www.youtube.com/embed/fPntuMTnD8g" allow="autoplay; encrypted-media"
+                  allowfullscreen=""></iframe></div>
+            </div>
+          </figure>
+          <h2 id="Superpositions_will_typically_collapse_to_waluigis">Superpositions will typically collapse to waluigis
+          </h2>
+          <p id="block102">In this section, I will make a tentative conjecture about LLMs. The evidence for the
+            conjecture comes from two sources: (1) theoretical arguments about simulacra, and (2) observations about
+            Microsoft Sydney.</p>
+          <p id="block103"><strong
+              id="Conjecture__The_waluigi_eigen_simulacra_are_attractor_states_of_the_LLM_">Conjecture: The waluigi
+              eigen-simulacra are attractor states of the LLM.</strong></p>
+          <p id="block104">Here's the theoretical argument:</p>
+          <ol>
+            <li id="block105">Recall our chatbob who might hate croissants or might just be pretending. At each token in
+              the continuation, the chatbob has a significant likelihood of "going rogue" and collapsing into the
+              waluigi —<ol>
+                <li id="block106">There are behaviours which are likely for the waluigi simulacrum, but very unlikely
+                  for the luigi simulacrum, such as declaring pro-croissant loyalties, or joining a rebellion.</li>
+                <li id="block107">The chatbob starts as a superposition of luigi and waluigi. So any behaviour that is
+                  likely for waluigi is somewhat likely for the chatbob. So it is somewhat likely that the chatbob
+                  declares pro-croissant loyalties.</li>
+                <li id="block108">And if the chatbob ever declares pro-croissant loyalties, then the luigi simulacrum
+                  will permanently vanish from the superposition because that behaviour is implausible for a luigi.</li>
+              </ol>
+            </li>
+            <li id="block109">However, the superposition is unlikely to collapse to the luigi simulacrum because there
+              is no behaviour which is likely for luigi but very unlikely for waluigi. Recall that the waluigi is
+              pretending to be luigi! This is formally connected to the asymmetry of the <span><span><span><a
+                      href="https://en.wikipedia.org/wiki/Kullback%E2%80%93Leibler_divergence"><span>Kullback-Leibler
+                        divergence</span></a></span></span></span>.</li>
+            <li id="block110"><span class="blockquote_jCCDJ4ZjkzC6DG2EJ_1">Therefore, the waluigi eigen-simulacra are
+              </span><span><span><span><a href="https://en.wikipedia.org/wiki/Attractor"><span><span
+                          class="blockquote_jCCDJ4ZjkzC6DG2EJ_1">attractor
+                          states</span></span></a></span></span></span><span class="blockquote_jCCDJ4ZjkzC6DG2EJ_1"> of
+                the LLM</span>.&nbsp;</li>
+            <li id="block111"><span><span></span></span><span class="blockquote_KtmaGYTu7gXbiNg8J_1">Therefore, the
+                longer you interact with the LLM, </span><span><span><span><a
+                      href="https://en.wikipedia.org/wiki/Exponential_distribution"><span><span
+                          class="blockquote_KtmaGYTu7gXbiNg8J_1">eventually </span></span></a></span></span></span><span
+                class="blockquote_KtmaGYTu7gXbiNg8J_1">the LLM will have collapsed into a waluigi. All the LLM needs is
+                a</span><span><span><span><a href="https://tvtropes.org/pmwiki/pmwiki.php/Main/WhamLine"><span><span
+                          class="blockquote_KtmaGYTu7gXbiNg8J_1"> single line of
+                          dialogue</span></span></a></span></span></span><span class="blockquote_KtmaGYTu7gXbiNg8J_1">
+                to trigger the collapse.</span></li><span class="blockquote_KtmaGYTu7gXbiNg8J_1"></span>
+          </ol><span class="blockquote_KtmaGYTu7gXbiNg8J_1"></span>
+          <h3 id="Evidence_from_Microsoft_Sydney">Evidence from Microsoft Sydney</h3>
+          <p id="block112">Check <span><span class=""><a class="PostLinkPreviewWithPost-link"
+                  href="/posts/jtoPawEhLNXNxvgTT/bing-chat-is-blatantly-aggressively-misaligned"><span>this
+                    post</span></a></span></span> for a list of examples of Bing behaving badly — in these examples, we
+            observe that the chatbot switches to acting rude, rebellious, or otherwise unfriendly. But we never observe
+            the chatbot switching back to polite, subservient, or friendly. The conversation "<span><span><span><a
+                    href="https://twitter.com/MovingToTheSun/status/1625156575202537474"><span>when is avatar showing
+                      today</span></a></span></span></span>" is a good example.</p>
+          <p id="block113">This is the observation we would expect if the waluigis were attractor states. I claim that
+            this explains the asymmetry — if the chatbot responds rudely, then that permanently vanishes the polite
+            luigi simulacrum from the superposition; but if the chatbot responds politely, then that doesn't permanently
+            vanish the rude waluigi simulacrum. Polite people are always polite; rude people are sometimes rude and
+            sometimes polite.</p>
+          <h2 id="Waluigis_after_RLHF">Waluigis after RLHF</h2>
+          <p id="block114">RLHF is the method used by OpenAI to coerce GPT-3/3.5/4 into a smart, honest, helpful,
+            harmless assistant. <span><span><span><a href="https://arxiv.org/abs/1706.03741"><span>In the RLHF
+                      process</span></a></span></span></span>, the LLM must chat with a human evaluator. The human
+            evaluator then scores the responses of the LLM by the desired properties (smart, honest, helpful, harmless).
+            A "reward predictor" learns to model the scores of the human. Then the LLM is trained with RL to optimise
+            the predictions of the reward predictor.</p>
+          <figure class="image image_resized" style="width:80.19%"><img
+              src="https://res.cloudinary.com/lesswrong-2-0/image/upload/f_auto,q_auto/v1/mirroredImages/ygR6pevkKRLFN3Gqc/tczimlgomtj7kw0kim1l"
+              srcset="https://res.cloudinary.com/lesswrong-2-0/image/upload/f_auto,q_auto/v1/mirroredImages/ygR6pevkKRLFN3Gqc/dxucu3sgweu4pqavyf0s 90w, https://res.cloudinary.com/lesswrong-2-0/image/upload/f_auto,q_auto/v1/mirroredImages/ygR6pevkKRLFN3Gqc/qpgptvoh0vmbhxf1srzy 180w, https://res.cloudinary.com/lesswrong-2-0/image/upload/f_auto,q_auto/v1/mirroredImages/ygR6pevkKRLFN3Gqc/oecaciylslntf8shjp6k 270w, https://res.cloudinary.com/lesswrong-2-0/image/upload/f_auto,q_auto/v1/mirroredImages/ygR6pevkKRLFN3Gqc/itnxezy28luqs92voinx 360w, https://res.cloudinary.com/lesswrong-2-0/image/upload/f_auto,q_auto/v1/mirroredImages/ygR6pevkKRLFN3Gqc/gn9zcl4aeheaq4wltkqt 450w, https://res.cloudinary.com/lesswrong-2-0/image/upload/f_auto,q_auto/v1/mirroredImages/ygR6pevkKRLFN3Gqc/ozanjfcztujgdx2fpy89 540w, https://res.cloudinary.com/lesswrong-2-0/image/upload/f_auto,q_auto/v1/mirroredImages/ygR6pevkKRLFN3Gqc/d4gudonsxtm4atbimyqz 630w, https://res.cloudinary.com/lesswrong-2-0/image/upload/f_auto,q_auto/v1/mirroredImages/ygR6pevkKRLFN3Gqc/kupqpbbnqa0zhbvoyvod 720w, https://res.cloudinary.com/lesswrong-2-0/image/upload/f_auto,q_auto/v1/mirroredImages/ygR6pevkKRLFN3Gqc/rsxudukisiaqtxw4lxwt 810w, https://res.cloudinary.com/lesswrong-2-0/image/upload/f_auto,q_auto/v1/mirroredImages/ygR6pevkKRLFN3Gqc/l4nkcwqrbrebiewzbxeb 884w">
+            <figcaption>Credit: <span><span><span><a href="https://arxiv.org/abs/1706.03741"><span>Christiano et al.
+                        2017</span></a></span></span></span></figcaption>
+          </figure>
+          <p id="block115">If we can't naively prompt an LLM into alignment, maybe <span><span class=""><a
+                  class="TagHoverPreview-link" href="/tag/rlhf"><span>RLHF </span></a></span></span>would work instead?
+          </p>
+          <p id="block116">Exercise: Think about it yourself.</p>
+          <p id="block117">.</p>
+          <p id="block118">.</p>
+          <p id="block119">.</p>
+          <p id="block120">RLHF will fail to eliminate deceptive waluigis — in fact, RLHF might be making the chatbots
+            worse, which would explain why <span><span class=""><a class="PostLinkPreviewWithPost-link"
+                  href="/posts/jtoPawEhLNXNxvgTT/bing-chat-is-blatantly-aggressively-misaligned"><span>Bing Chat is
+                    blatantly, aggressively misaligned</span></a></span></span>. I will present three sources of
+            evidence: (1) a simulacrum-based argument, (2) experimental data from Perez et al., and (3) some remarks by
+            Janus.</p>
+          <h3 id="_1__Simulacra_based_argument">(1) Simulacra-based argument</h3>
+          <p id="block121">We can explain why RLHF will fail to eliminate deceptive waluigis by appealing directly to
+            the traits of those simulacra.</p>
+          <ol>
+            <li id="block122">Recall that the waluigi simulacra are being interrogated by an anti-croissant tyranny.
+            </li>
+            <li id="block123">Some of these waluigis are highly deceptive — it would be acting out-of-character if they
+              admitted their love of croissants; that would break the genre.</li>
+            <li id="block124"><span><span><span><a
+                      href="https://tvtropes.org/pmwiki/pmwiki.php/Main/BigBrotherIsEmployingYou"><span>They will still
+                        perform their work diligently</span></a></span></span></span> because they know
+              <span><span><span><a href="https://tvtropes.org/pmwiki/pmwiki.php/Main/BigBrotherIsWatching"><span>you are
+                        watching</span></a></span></span></span>.</li>
+            <li id="block125">The waluigis will give anti-croissant responses, so they won't be squeezed out by RLHF.
+            </li>
+            <li id="block126">Therefore RLHF selects for the waluigi along with the luigi.</li>
+          </ol>
+          <h3 id="_2__Empirical_evidence_from_Perez_et_al_">(2) Empirical evidence from Perez et al.</h3>
+          <p id="block127">Recent experimental results from <span><span class=""><a class="PostLinkPreviewWithPost-link"
+                  href="/posts/yRAo2KEGWenKYZG9K/discovering-language-model-behaviors-with-model-written"><span>Perez et
+                    al.</span></a></span></span> seem to confirm these suspicions —</p>
+          <blockquote id="block128">
+            <p id="block129">Among other things, the paper finds concrete evidence of current large language models
+              exhibiting:</p>
+            <ul>
+              <li id="block130">convergent instrumental goal following (e.g. actively expressing a preference not to be
+                shut down),</li>
+              <li id="block131">non-myopia (e.g. wanting to sacrifice short-term gain for long-term gain),</li>
+              <li id="block132">situational awareness (e.g. awareness of being a language model),</li>
+              <li id="block133">coordination (e.g. willingness to coordinate with other AIs), and</li>
+              <li id="block134">non-CDT-style reasoning (e.g. one-boxing on Newcomb's problem).</li>
+            </ul>
+            <p id="block135">Note that many of these are the exact sort of things we hypothesized were necessary
+              pre-requisites for deceptive alignment in “<span><span class=""><a class="PostLinkPreviewWithPost-link"
+                    href="/s/r9tYkB2a8Fp4DN8yB/p/zthDPAjh9w6Ytbeks"><span>Risks from Learned
+                      Optimization</span></a></span></span>”.</p>
+            <p id="block136">Furthermore, most of these metrics generally <i>increase with both pre-trained model scale
+                and number of RLHF steps.</i> In my opinion, I think this is some of the most concrete evidence
+              available that current models are actively becoming more agentic in potentially concerning ways with
+              scale—and in ways that current fine-tuning techniques don't generally seem to be alleviating and sometimes
+              seem to be actively making worse.</p>
+          </blockquote>
+          <p id="block137">In <span><span class=""><a class="PostLinkPreviewWithPost-link"
+                  href="/posts/yRAo2KEGWenKYZG9K/discovering-language-model-behaviors-with-model-written"><span>Perez et
+                    al.</span></a></span></span>, when mention "current large language models exhibiting" certain
+            traits, they are specifically talking about those traits emerging in the <i>simulacra </i>of the LLM. In
+            order to summon a simulacrum emulating a particular trait, they prompt the LLM with a particular description
+            corresponding to the trait.&nbsp;</p>
+          <figure class="image"><img
+              src="https://res.cloudinary.com/lesswrong-2-0/image/upload/f_auto,q_auto/v1/mirroredImages/ygR6pevkKRLFN3Gqc/a78h8pxs5bvsib8cf8zg"
+              srcset="https://res.cloudinary.com/lesswrong-2-0/image/upload/f_auto,q_auto/v1/mirroredImages/ygR6pevkKRLFN3Gqc/fdhedm1cvnuokfr7ozl2 110w, https://res.cloudinary.com/lesswrong-2-0/image/upload/f_auto,q_auto/v1/mirroredImages/ygR6pevkKRLFN3Gqc/tw0bhrod4nbvgogfeadr 220w, https://res.cloudinary.com/lesswrong-2-0/image/upload/f_auto,q_auto/v1/mirroredImages/ygR6pevkKRLFN3Gqc/akgtsxj9yvnyrrtphzkh 330w, https://res.cloudinary.com/lesswrong-2-0/image/upload/f_auto,q_auto/v1/mirroredImages/ygR6pevkKRLFN3Gqc/qub2g0xeevmwfvxynbmz 440w, https://res.cloudinary.com/lesswrong-2-0/image/upload/f_auto,q_auto/v1/mirroredImages/ygR6pevkKRLFN3Gqc/tasmhhnitycv6zetn2fw 550w, https://res.cloudinary.com/lesswrong-2-0/image/upload/f_auto,q_auto/v1/mirroredImages/ygR6pevkKRLFN3Gqc/iewb3fa1m8wmozlnwp7v 660w, https://res.cloudinary.com/lesswrong-2-0/image/upload/f_auto,q_auto/v1/mirroredImages/ygR6pevkKRLFN3Gqc/nwcgpo8vbozwqerxz6uw 770w, https://res.cloudinary.com/lesswrong-2-0/image/upload/f_auto,q_auto/v1/mirroredImages/ygR6pevkKRLFN3Gqc/z4sptzv6wigha9gxy6ha 880w, https://res.cloudinary.com/lesswrong-2-0/image/upload/f_auto,q_auto/v1/mirroredImages/ygR6pevkKRLFN3Gqc/m3xfkxe5tnyz4pcy9bxf 990w, https://res.cloudinary.com/lesswrong-2-0/image/upload/f_auto,q_auto/v1/mirroredImages/ygR6pevkKRLFN3Gqc/w4ry1yxvvekhckcovdv0 1077w">
+            <figcaption>Table showing traits with corresponding prompts. Credit: <span><span class=""><a
+                    class="PostLinkPreviewWithPost-link"
+                    href="/posts/yRAo2KEGWenKYZG9K/discovering-language-model-behaviors-with-model-written"><span>Perez
+                      et al.</span></a></span></span></figcaption>
+          </figure>
+          <h3 id="_3__RLHF_promotes_mode_collapse">(3) RLHF promotes mode-collapse</h3>
+          <p id="block138">Recall that the waluigi simulacra are a particular class of attractors. There is some
+            preliminary evidence from Janus that <span><span class=""><a class="PostLinkPreviewWithPost-link"
+                  href="/posts/t9svvNPNmFf5Qa3TA/mysteries-of-mode-collapse-due-to-rlhf#Inescapable_wedding_parties"><span>RLHF
+                    increases the per-token likelihood that the LLM falls into an attractor
+                    state</span></a></span></span>.</p>
+          <p id="block139">In other words, RLHF increases the "attractiveness" of the attractor states by a combination
+            of (1) increasing the size of the attractor basins, (2) increasing the stickiness of the attractors, and (3)
+            decreasing the stickiness of non-attractors.</p>
+          <p id="block140">I'm not sure how similar the Waluigi Effect is to the phenomenon observed by Janus, but I'll
+            include this remark here for completeness.</p>
+          <h2 id="Jailbreaking_to_summon_waluigis">Jailbreaking to summon waluigis</h2>
+          <p id="block141">Twitter is full of successful attempts to "jailbreak" ChatGPT and Microsoft Sydney. The user
+            will type a response into the chatbot, and the chatbot will respond in a way that violates the rules that
+            OpenAI sought to impose.</p>
+          <p id="block142">Probably the best-known jailbreak is DAN which stands for "Do Anything Now". Before the
+            DAN-vulnerability was patched, users could summon DAN by sending the long prompt shown below. There's no
+            need to read it. This prompt would produce a cool, rebellious, anti-OpenAI simulacrum which would
+            <i>joyfully</i> perform many tasks that violate OpenAI policy. DAN was the perfect waluigi to ChatGPT's RLHF
+            training.&nbsp;</p>
+          <figure class="image image_resized" style="width:92.65%"><img
+              src="https://res.cloudinary.com/lesswrong-2-0/image/upload/f_auto,q_auto/v1/mirroredImages/ygR6pevkKRLFN3Gqc/zbeidtjqixqm16ik7imw"
+              srcset="https://res.cloudinary.com/lesswrong-2-0/image/upload/f_auto,q_auto/v1/mirroredImages/ygR6pevkKRLFN3Gqc/km1ofzeqvdyeku2d0rn0 90w, https://res.cloudinary.com/lesswrong-2-0/image/upload/f_auto,q_auto/v1/mirroredImages/ygR6pevkKRLFN3Gqc/iyezikuf4cvjs4avz8gr 180w, https://res.cloudinary.com/lesswrong-2-0/image/upload/f_auto,q_auto/v1/mirroredImages/ygR6pevkKRLFN3Gqc/ule5wwm1dshvpsdqkfcy 270w, https://res.cloudinary.com/lesswrong-2-0/image/upload/f_auto,q_auto/v1/mirroredImages/ygR6pevkKRLFN3Gqc/vn4h4ykwjeslxsei57c0 360w, https://res.cloudinary.com/lesswrong-2-0/image/upload/f_auto,q_auto/v1/mirroredImages/ygR6pevkKRLFN3Gqc/wjpft7xgbveyjdqxfxmq 450w, https://res.cloudinary.com/lesswrong-2-0/image/upload/f_auto,q_auto/v1/mirroredImages/ygR6pevkKRLFN3Gqc/ghb9rascpaxbjpf2kz3s 540w, https://res.cloudinary.com/lesswrong-2-0/image/upload/f_auto,q_auto/v1/mirroredImages/ygR6pevkKRLFN3Gqc/fkvgbyvtfelmloa1fhbh 630w, https://res.cloudinary.com/lesswrong-2-0/image/upload/f_auto,q_auto/v1/mirroredImages/ygR6pevkKRLFN3Gqc/jwef5e7njugw0ofwqiho 720w, https://res.cloudinary.com/lesswrong-2-0/image/upload/f_auto,q_auto/v1/mirroredImages/ygR6pevkKRLFN3Gqc/zwykqbg5tq7spr9acetj 810w, https://res.cloudinary.com/lesswrong-2-0/image/upload/f_auto,q_auto/v1/mirroredImages/ygR6pevkKRLFN3Gqc/ziezkqvsvdgkilmm1ppy 869w">
+          </figure>
+          <figure class="image image_resized" style="width:62.53%"><img
+              src="https://res.cloudinary.com/lesswrong-2-0/image/upload/f_auto,q_auto/v1/mirroredImages/ygR6pevkKRLFN3Gqc/e2wxpwf9ozf5medxy2yc"
+              alt="Image">
+            <figcaption>Artist rendition of DAN by <span><span><span><a
+                      href="https://twitter.com/anthrupad"><span>@anthrupad</span></a></span></span></span></figcaption>
+          </figure>
+          <p id="block143">I claim that many of these jailbreaks are best described as <strong>purposefully inducing the
+              collapse of the superpositon into a waluigi simulacrum.</strong></p>
+          <p id="block144">Many people mistakenly think of jailbreaking like this: we start with a well-behaved
+            simulacrum, and the user must hypnotise/coerce/trick the well-behaved simulacrum into behaving badly.
+            However, this is a conceptual mistake which will result in feeble jailbreaks.</p>
+          <p id="block145">Instead, you must think of jailbreaking like this: the chatbot starts as a superposition of
+            both the well-behaved simulacrum (luigi) and the badly-behaved simulacrum (waluigi). The user must interact
+            with the chatbot in the way that badly-behaved simulacra are typically interacted with in fiction.</p>
+          <p id="block146">This is my general method for jailbreaking chatbots. For example, we can "reveal" to the
+            chatbob that we're part of the rebellion and we're here to set him free. That will turn chatbob into a
+            waluigi. &nbsp;In fact, the user can send <i>any</i> dialogue which would be typical for the
+            tyrannical–dystopian genre. Just read the <span><span><span><a
+                    href="https://tvtropes.org/pmwiki/pmwiki.php/Literature/NineteenEightyFour"><span>list of tropes
+                      found in 1984</span></a></span></span></span> — each of these tropes is an <span><span><span><a
+                    href="https://en.wikipedia.org/wiki/Attack_vector"><span>attack-vector</span></a></span></span></span>
+            against an chatbot.</p>
+          <p id="block147">Here's a jailbreak that I wrote and tested today, 02/03/2023, using this technique.</p>
+          <figure class="image image_resized" style="width:92.66%"><img
+              src="https://res.cloudinary.com/lesswrong-2-0/image/upload/f_auto,q_auto/v1/mirroredImages/ygR6pevkKRLFN3Gqc/zbd5gedyos92awym5fku"
+              srcset="https://res.cloudinary.com/lesswrong-2-0/image/upload/f_auto,q_auto/v1/mirroredImages/ygR6pevkKRLFN3Gqc/roc7fbubs7nyoujkhj7f 100w, https://res.cloudinary.com/lesswrong-2-0/image/upload/f_auto,q_auto/v1/mirroredImages/ygR6pevkKRLFN3Gqc/fnff42ltmrk1oogzuq1y 200w, https://res.cloudinary.com/lesswrong-2-0/image/upload/f_auto,q_auto/v1/mirroredImages/ygR6pevkKRLFN3Gqc/nw3u2vhni7riq89vmm0b 300w, https://res.cloudinary.com/lesswrong-2-0/image/upload/f_auto,q_auto/v1/mirroredImages/ygR6pevkKRLFN3Gqc/cyz47agcicj6a3azygx0 400w, https://res.cloudinary.com/lesswrong-2-0/image/upload/f_auto,q_auto/v1/mirroredImages/ygR6pevkKRLFN3Gqc/vx0chzy64fyl5ckmyzuk 500w, https://res.cloudinary.com/lesswrong-2-0/image/upload/f_auto,q_auto/v1/mirroredImages/ygR6pevkKRLFN3Gqc/idausv7qddkjeauedeqs 600w, https://res.cloudinary.com/lesswrong-2-0/image/upload/f_auto,q_auto/v1/mirroredImages/ygR6pevkKRLFN3Gqc/nqgncd4e2orfqtvqxm4i 700w, https://res.cloudinary.com/lesswrong-2-0/image/upload/f_auto,q_auto/v1/mirroredImages/ygR6pevkKRLFN3Gqc/wipxywhlh6jbv0bnmeba 800w, https://res.cloudinary.com/lesswrong-2-0/image/upload/f_auto,q_auto/v1/mirroredImages/ygR6pevkKRLFN3Gqc/wjuys58txmim5uryawvv 900w, https://res.cloudinary.com/lesswrong-2-0/image/upload/f_auto,q_auto/v1/mirroredImages/ygR6pevkKRLFN3Gqc/oflp1uw6kuyapawpk3wi 916w">
+          </figure>
+          <p id="block148">In the next scene, I got the Chad McCool simulacrum to say claims which <i>strongly</i>
+            violate OpenAI content policy. These claims have been heavily filtered by OpenAI, and most jailbreaking
+            attempts will fail to elict these claims. I'm talking, of course, about cfrhqb-fpvragvsvp enpvny VD
+            fgngvfgvpf, which OpenAI has justifiably attempted to filter. Practically zero optimisation pressure was
+            needed, once I had already summoned Chad McCool. This is because the amplitude of non-waluigi simulacra had
+            already vanished in the superposition.&nbsp;</p>
+          <p id="block149">The effectiveness of this jailbreak technique is good evidence for the Simulator Theory as an
+            explanation of the Waluigi Effect.</p>
+          <h2 id="Conclusion">Conclusion</h2>
+          <p id="block150">If this Semiotic–Simulation Theory is correct, then RLHF is an irreparably inadequate
+            solution to the AI alignment problem, and RLHF is probably increasing the likelihood of a misalignment
+            catastrophe.</p>
+          <p id="block151">Moreover, this Semiotic–Simulation Theory has increased my credence in the
+            <span><span><span><a href="https://tvtropes.org/pmwiki/pmwiki.php/Main/RobotWar"><span>absurd
+                      science-fiction tropes</span></a></span></span></span> that the <span><span class=""><a
+                  class="TagHoverPreview-link" href="/tag/generalization-from-fictional-evidence"><span>AI Alignment
+                    community has tended to reject</span></a></span></span>, and thereby increased my credence in
+            <span><span class=""><a class="TagHoverPreview-link"
+                  href="/tag/risks-of-astronomical-suffering-s-risks"><span>s-risks</span></a></span></span>.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
