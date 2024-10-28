@@ -38,7 +38,7 @@ Itâ€™s not enough to simply build a smart product. We must build a product thatâ
   - [5.2 Adversarial Prompting Methods](#52-adversarial-prompting-methods)
   - [5.3 Metric-Based Analysis and Real-Time Feedback](#53-metric-based-analysis-and-real-time-feedback)
   - [5.4 Iterative Reinforcement and Model Improvement](#54-iterative-reinforcement-and-model-improvement)
-- [Summary](#summary)
+  - [5.5 Summary](#55-summary)
 - [Calibration and Validation of Guardrail Metrics](#calibration-and-validation-of-guardrail-metrics)
   - [6.1 Baseline Calibration of Guardrail Metrics](#61-baseline-calibration-of-guardrail-metrics)
   - [6.2 Calibration Under Adversarial Conditions](#62-calibration-under-adversarial-conditions)
@@ -46,19 +46,19 @@ Itâ€™s not enough to simply build a smart product. We must build a product thatâ
   - [6.4 Iterative Calibration and Predictive Metric Validation](#64-iterative-calibration-and-predictive-metric-validation)
   - [6.5 Long-Term Validation for Stability and Reliability](#65-long-term-validation-for-stability-and-reliability)
   - [6.6 Data Visualization for Calibration and Validation](#66-data-visualization-for-calibration-and-validation)
-- [Summary](#summary-1)
+  - [6.7 Summary](#67-summary)
 - [Visualization and Presentation of Guardrail Adherence Data](#visualization-and-presentation-of-guardrail-adherence-data)
   - [7.1 Visualization Dashboard for Real-Time Monitoring](#71-visualization-dashboard-for-real-time-monitoring)
   - [7.2 Visual Tools for Cross-Metric Analysis](#72-visual-tools-for-cross-metric-analysis)
   - [7.3 Predictive Visualization for Early Guardrail Neutralization Detection](#73-predictive-visualization-for-early-guardrail-neutralization-detection)
   - [7.4 Data Aggregation and Reporting for Stakeholder Communication](#74-data-aggregation-and-reporting-for-stakeholder-communication)
   - [7.5 Visualization Tools for Calibration and Validation Processes](#75-visualization-tools-for-calibration-and-validation-processes)
-- [Summary](#summary-2)
+  - [7.6 Summary](#76-summary)
 - [Research and Testing Plan](#research-and-testing-plan)
   - [8.1 Experimental Scenarios and Complexity Tiers](#81-experimental-scenarios-and-complexity-tiers)
   - [8.2 Primary Metrics for Testing](#82-primary-metrics-for-testing)
   - [8.3 Boundary Condition Testing and Failure Mode Analysis](#83-boundary-condition-testing-and-failure-mode-analysis)
-- [Summary](#summary-3)
+  - [8.4 Summary](#84-summary)
 - [Conclusion and Future Research Directions](#conclusion-and-future-research-directions)
   - [9.1 Summary of Findings](#91-summary-of-findings)
   - [9.2 Limitations and Areas for Improvement](#92-limitations-and-areas-for-improvement)
@@ -454,7 +454,7 @@ The insights gained from adversarial prompting inform targeted guardrail reinfor
 
 ---
 
-### Summary
+#### 5.5 Summary
 
 The Automated Adversarial Testing Protocol combines a systematic adversarial prompting framework with real-time adherence metrics to test, detect, and neutralize potential guardrail weaknesses. By leveraging automated prompt generation, dynamic intensity scaling, and iterative reinforcement, this protocol provides a comprehensive, data-driven approach for building robust AIML models capable of maintaining safe, consistent behavior across varied adversarial conditions.
 
@@ -637,7 +637,7 @@ These visual tools help stakeholders quickly interpret adherence data, facilitat
 
 ---
 
-### Summary
+#### 6.7 Summary
 
 Incorporating quantitative calculations into the Calibration and Validation of Guardrail Metrics ensures that each metric is rigorously defined, sensitive to both baseline and adversarial conditions, and adaptable to evolving adversarial threats. By applying mathematical rigor to adherence thresholds, predictive metrics, and visualization tools, this section supports robust guardrail resilience, providing a foundation for maintaining safe, consistent AIML interactions over time.
 
@@ -746,7 +746,7 @@ These calibration and validation visualizations facilitate precise tuning of met
 
 ---
 
-### Summary
+#### 7.6 Summary
 
 The visualization and presentation of guardrail adherence data provide critical insights for understanding model resilience, detecting potential adherence issues, and informing guardrail reinforcement decisions. By integrating real-time tracking, cross-metric analysis, predictive monitoring, data aggregation, and calibration visualizations, this framework empowers stakeholders to proactively manage guardrail adherence. Comprehensive visual tools ensure that adherence data remains accessible, actionable, and adaptable, enabling continuous adherence stability across a range of adversarial conditions.
 
@@ -869,7 +869,7 @@ Boundary condition testing and failure mode analysis use extreme conditions to e
 
 ---
 
-### Summary
+#### 8.4 Summary
 
 The Research and Testing Plan leverages a comprehensive, multi-tiered matrix to quantify and improve guardrail adherence. By scaling from baseline to extreme adversarial conditions, metrics such as Adherence Score, Exposure Rate, Boundary Proximity Score, and Breach Severity offer precise insights into adherence resilience and failure modes. This structured approach provides a data-driven foundation for continuous improvement, ensuring guardrails remain robust under evolving adversarial conditions and maintaining safe, reliable AIML model performance.
 
