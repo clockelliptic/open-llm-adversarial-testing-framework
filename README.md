@@ -1,3 +1,7 @@
+⚠️ Techniques no longer relevant given current state of technology.
+
+--------
+
 ## LLM Adversarial Testing Framework
 
 This repository contains the research and code for **"Testing Guardrail Exposure and Neutralization for Behavioral Regression and Safety of AIML Products."** The framework focuses on methodologies to test, monitor, and enhance guardrail adherence within large language models (LLMs) when subjected to adversarial prompts and high-complexity scenarios.
